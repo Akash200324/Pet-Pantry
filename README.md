@@ -6,8 +6,8 @@ A fully functional full-stack web application designed to help pet owners manage
 
 ### 🛠️ Tech Stack
 - **Frontend:** HTML5, CSS3, JavaScript
-- **Backend:**  Python *
-- **Database:** MongoDB * 
+- **Backend:**  Python 
+- **Database:** MongoDB 
 - **Payment Gateway:** Razorpay API
 
 ---
