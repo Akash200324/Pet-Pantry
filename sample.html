@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Pantry | Luxury Pet Care & Provisioning</title>
+
+    {% load static %}
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= PREMIUM MODERN CORE SYSTEM ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brand-primary: #FA824C;      /* Warm Tangerine */
+            --brand-secondary: #3A5A40;    /* Sage/Forest Green */
+            --brand-accent: #E9D8A6;       /* Soft Sand Gold */
+            --bg-base: #FDFBF7;            /* Editorial Almond Cream */
+            --bg-card: #FFFFFF;
+            --text-main: #131B23;          /* Dark Charcoal Velvet */
+            --text-muted: #677483;
+            --curve-lg: 32px;
+            --curve-md: 20px;
+            --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+        }
+
+        /* Scroll Reveal Utility Classes */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-smooth);
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================= ASYMMETRICAL FLOATING NAVBAR ================= */
+        .navbar {
+            padding: 20px 0;
+            transition: var(--transition-smooth);
+            z-index: 1050;
+        }
+
+        .navbar-wrapper {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 12px 30px;
+            border-radius: 100px;
+            border: 1px solid rgba(19, 27, 35, 0.05);
+            transition: var(--transition-smooth);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar.scrolled .navbar-wrapper {
+            background: var(--text-main);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .navbar.scrolled .navbar-brand,
+        .navbar.scrolled .nav-link {
+            color: var(--bg-base) !important;
+        }
+
+        .navbar-brand {
+            font-size: 26px;
+            color: var(--text-main) !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar-brand span {
+            color: var(--brand-primary);
+        }
+
+        .navbar .nav-link {
+            color: var(--text-main) !important;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 50%; width: 0; height: 2px;
+            background: var(--brand-primary);
+            transition: var(--transition-smooth);
+            transform: translateX(-50%);
+        }
+
+        .navbar .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-nav-btn {
+            background: var(--brand-primary);
+            color: var(--white) !important;
+            padding: 10px 24px !important;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .cta-nav-btn:hover {
+            transform: scale(1.04);
+            background: var(--text-main);
+            color: var(--bg-base) !important;
+        }
+
+        /* ================= VIBRANT EDITORIAL HERO ================= */
+        .hero-section {
+            min-height: 100vh;
+            padding: 160px 0 100px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 80% 20%, rgba(250, 130, 76, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-tag {
+            background: rgba(58, 90, 64, 0.08);
+            color: var(--brand-secondary);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .hero-section h1 {
+            font-size: 76px;
+            line-height: 1.05;
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+
+        .hero-section h1 em {
+            color: var(--brand-primary);
+            font-style: normal;
+            position: relative;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-width: 580px;
+            margin-bottom: 40px;
+        }
+
+        .hero-action-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-premium {
+            padding: 18px 38px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-dark-pill {
+            background: var(--text-main);
+            color: var(--bg-base);
+        }
+
+        .btn-dark-pill:hover {
+            background: var(--brand-primary);
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        .hero-visual-frame {
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .main-hero-img {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            border-radius: var(--curve-lg);
+            transform: rotate(2deg);
+            box-shadow: 0 30px 60px rgba(19, 27, 35, 0.1);
+            transition: var(--transition-smooth);
+        }
+
+        .hero-visual-frame:hover .main-hero-img {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .floating-interactive-bubble {
+            position: absolute;
+            bottom: 40px;
+            left: -30px;
+            background: var(--bg-card);
+            border-radius: var(--curve-md);
+            padding: 20px 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: floatY 4s infinite ease-in-out;
+        }
+
+        /* ================= MODERN BENTO GRID FEATURES ================= */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .bento-cell {
+            background: var(--bg-card);
+            border-radius: var(--curve-lg);
+            padding: 45px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(19, 27, 35, 0.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            transition: var(--transition-smooth);
+        }
+
+        .bento-cell:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(19, 27, 35, 0.06);
+        }
+
+        .cell-large {
+            grid-column: span 2;
+            background: var(--brand-secondary);
+            color: var(--bg-base);
+        }
+
+        .bento-cell .icon-box {
+            width: 65px;
+            height: 65px;
+            background: var(--bg-base);
+            color: var(--brand-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            transition: var(--transition-smooth);
+        }
+
+        .cell-large .icon-box {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--brand-accent);
+        }
+
+        .bento-cell:hover .icon-box {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* ================= ASYMMETRICAL ABOUT SECTION ================= */
+        .about-split-grid {
+            background: rgba(58, 90, 64, 0.03);
+            border-radius: var(--curve-lg);
+            padding: 80px;
+        }
+
+        .asymmetric-gallery {
+            position: relative;
+        }
+
+        .asymmetric-gallery img {
+            width: 100%;
+            border-radius: var(--curve-md);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        /* ================= CAROUSEL DIAGONAL PRODUCT GRID ================= */
+        .product-strip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .minimal-product-card {
+            background: var(--bg-card);
+            border-radius: var(--curve-md);
+            overflow: hidden;
+            border: 1px solid rgba(19, 27, 35, 0.03);
+            transition: var(--transition-smooth);
+            height: 100%;
+        }
+
+        .minimal-product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.06);
+        }
+
+        .img-container-wrap {
+            background: #F4F1EA;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .img-container-wrap img {
+            max-height: 200px;
+            object-fit: contain;
+            transition: var(--transition-smooth);
+        }
+
+        .minimal-product-card:hover .img-container-wrap img {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        .product-meta-pad {
+            padding: 30px;
+        }
+
+        .cart-add-sliding-btn {
+            background: var(--text-main);
+            color: var(--bg-base);
+            width: 100%;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 20px;
+            display: block;
+        }
+
+        .cart-add-sliding-btn:hover {
+            background: var(--brand-primary);
+            color: white;
+        }
+
+        /* ================= ELEGANT PROMO CARD ================= */
+        .organic-banner {
+            background: var(--brand-primary);
+            border-radius: var(--curve-lg);
+            padding: 90px;
+            color: var(--bg-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ================= MAGAZINE-STYLE JOURNAL ================= */
+        .journal-row-card {
+            display: flex;
+            gap: 40px;
+            padding: 40px 0;
+            border-bottom: 1px solid rgba(19, 27, 35, 0.1);
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+
+        .journal-row-card:hover {
+            padding-left: 20px;
+            background: rgba(250, 130, 76, 0.02);
+        }
+
+        .journal-mini-img {
+            width: 240px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: var(--curve-md);
+        }
+
+        /* ================= MINIMALIST TESTIMONIALS ================= */
+        .editorial-quote-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--brand-primary);
+            padding: 40px;
+            border-radius: 0 var(--curve-md) var(--curve-md) 0;
+        }
+
+        /* ================= FOOTER ================= */
+        .premium-footer {
+            background: var(--text-main);
+            color: rgba(255,255,255,0.7);
+            padding: 100px 0 40px;
+            border-radius: var(--curve-lg) var(--curve-lg) 0 0;
+        }
+
+        .premium-footer h4 {
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .premium-footer a {
+            color: rgba(255,255,255,0.6);
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .premium-footer a:hover {
+            color: var(--brand-primary);
+            transform: translateX(4px);
+        }
+
+        /* Animations */
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 991px) {
+            .bento-grid { grid-template-columns: 1fr; }
+            .cell-large { grid-column: span 1; }
+            .hero-section h1 { font-size: 48px; }
+            .journal-row-card { flex-direction: column; align-items: flex-start; }
+            .journal-mini-img { width: 100%; height: 220px; }
+            .about-split-grid, .organic-banner { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <div class="navbar-wrapper">
+            <a class="navbar-brand brand-font" href="#">
+                Pet <span>Pantry.</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#innerMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="innerMenu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Provisions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Our Philosophy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Care Studio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Journal</a></li>
+                </ul>
+            </div>
+            <a href="#" class="cta-nav-btn d-none d-lg-inline-block">Get 50% Off</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="hero-tag"><i class="bi bi-patch-check-fill"></i> RE-IMAGINING PET WELLNESS</div>
+                <h1>Nourish Your Best Friend <em>Elegantly.</em></h1>
+                <p>An updated space for natural care systems. Discover certified whole-protein provisions, smart cognitive stimulation systems, and organic grooming solutions.</p>
+                <div class="hero-action-group">
+                    <a href="#" class="btn-premium btn-dark-pill">Enter Provision Library <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-visual-frame">
+                    <img src="{% static 'img/hero.jpg' %}" class="main-hero-img" alt="Dog Model">
+                    <div class="floating-interactive-bubble">
+                        <div class="icon-ui"><i class="bi bi-star-fill text-warning"></i></div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">Organic Standard</h6>
+                            <small class="text-muted">100% Non-Toxic Guarantee</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal-element">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-6">
+                <h6 class="text-uppercase tracking-wider text-muted fw-bold small mb-2">Capabilities</h6>
+                <h2>Engineered with Love, Built for Longevity</h2>
+            </div>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-cell cell-large">
+                <div class="icon-box"><i class="bi bi-lightning-charge-fill"></i></div>
+                <h3 class="mb-3">Same-Day Logistics Ecosystem</h3>
+                <p class="opacity-75">Enjoy precise fulfillment parameters that deliver essential functional whole grains and raw medical configs exactly when required.</p>
+            </div>
+            <div class="bento-cell">
+                <div class="icon-box"><i class="bi bi-heart-pulse-fill"></i></div>
+                <h3 class="mb-3">Expert Care Mapping</h3>
+                <p class="text-muted">Every singular catalog drop goes through detailed certification passes monitored closely by expert dietary researchers.</p>
+            </div>
+            <div class="bento-cell">
+                <div class="icon-box"><i class="bi bi-gem"></i></div>
+                <h3 class="mb-3">Elite Tier Sourcing</h3>
+                <p class="text-muted">Get verified access to functional global meal patterns, non-toxic organic play layers, and modern domestic tools.</p>
+            </div>
+            <div class="bento-cell cell-large" style="background: var(--brand-accent); color: var(--text-main);">
+                <div class="icon-box" style="background: var(--text-main); color: var(--brand-accent);"><i class="bi bi-shield-check"></i></div>
+                <h3 class="mb-3">Transparent Sourcing Guarantee</h3>
+                <p class="opacity-75">Trace every single protein back to its root destination farm. No filler structures, no corporate chemical stabilizers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal-element">
+    <div class="container">
+        <div class="about-split-grid">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5">
+                    <div class="asymmetric-gallery">
+                        <img src="{% static 'img/about.jpg' %}" alt="About Story Image">
+                    </div>
+                </div>
+                <div class="col-lg-7 ps-lg-5">
+                    <h6 class="text-uppercase text-muted fw-bold small mb-2">Our Manifesto</h6>
+                    <h2 class="display-5 mb-4">Because standard optimization isn't acceptable for family.</h2>
+                    <p class="text-muted mb-4">Pet Pantry works tirelessly to build architectural foundations surrounding animal safety and longevity. We strip down typical industrial supply practices to offer artisanal clean selections instead.</p>
+                    <a href="#" class="btn-premium btn-dark-pill">Our Production Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal-element">
+    <div class="container">
+        <div class="product-strip-header">
+            <div>
+                <h6 class="text-uppercase text-muted fw-bold small mb-2">Provisions Store</h6>
+                <h2>Premium Curated Drops</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="minimal-product-card">
+                    <div class="img-container-wrap">
+                        <img src="{% static 'img/product-1.png' %}" alt="P1">
+                    </div>
+                    <div class="product-meta-pad">
+                        <h4>Premium Dog Kibble</h4>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price">₹599</span>
+                        </div>
+                        <a href="#" class="cart-add-sliding-btn">Acquire Provision</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="minimal-product-card">
+                    <div class="img-container-wrap">
+                        <img src="{% static 'img/product-2.png' %}" alt="P2">
+                    </div>
+                    <div class="product-meta-pad">
+                        <h4>Cat Whole-Food Nutrition</h4>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price">₹449</span>
+                        </div>
+                        <a href="#" class="cart-add-sliding-btn">Acquire Provision</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="minimal-product-card">
+                    <div class="img-container-wrap">
+                        <img src="{% static 'img/product-3.png' %}" alt="P3">
+                    </div>
+                    <div class="product-meta-pad">
+                        <h4>Organic Shedding Groom Kit</h4>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price">₹799</span>
+                        </div>
+                        <a href="#" class="cart-add-sliding-btn">Acquire Provision</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="minimal-product-card">
+                    <div class="img-container-wrap">
+                        <img src="{% static 'img/product-4.png' %}" alt="P4">
+                    </div>
+                    <div class="product-meta-pad">
+                        <h4>Interactive Mental Play Kit</h4>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price">₹349</span>
+                        </div>
+                        <a href="#" class="cart-add-sliding-btn">Acquire Provision</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal-element">
+    <div class="container">
+        <div class="organic-banner text-center">
+            <h1 class="display-3 mb-3">Begin Your Relationship Framework</h1>
+            <p class="mx-auto opacity-90 fs-5 mb-4" style="max-width: 600px;">Unlock an exclusive introductory 50% discount allocation across your entire inaugural provision order structure instantly.</p>
+            <a href="#" class="btn-premium btn-dark-pill px-5">Redeem First Order Code</a>
+        </div>
+    </div>
+</section>
+
+<section class="reveal-element">
+    <div class="container">
+        <div class="row mb-5 align-items-end">
+            <div class="col-lg-6">
+                <h6 class="text-uppercase text-muted fw-bold small mb-2">Scientific Literature</h6>
+                <h2>The Animal Care Journal</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="journal-row-card">
+                    <img src="{% static 'img/blog-1.jpg' %}" class="journal-mini-img" alt="Blog entry 1">
+                    <div>
+                        <div class="text-uppercase text-danger fw-bold small mb-2">Nutrition Science</div>
+                        <h3><a href="#" class="text-dark">Decoding Macro-Nutrient Requirements in Modern Canines</a></h3>
+                        <p class="text-muted mb-0">An analysis into why cleaner base processing patterns reduce chronic systemic biological reactions dramatically over multi-year cycles.</p>
+                    </div>
+                </div>
+                <div class="journal-row-card">
+                    <img src="{% static 'img/blog-2.jpg' %}" class="journal-mini-img" alt="Blog entry 2">
+                    <div>
+                        <div class="text-uppercase text-success fw-bold small mb-2">Neurological Health</div>
+                        <h3><a href="#" class="text-dark">How Spatial Play Triggers Complex Problem-Solving Paths</a></h3>
+                        <p class="text-muted mb-0">Practical routines designed to stimulate cognitive path layers, decreasing domestic isolation anxiety symptoms without traditional pharmaceuticals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reveal-element">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="editorial-quote-card">
+                    <p class="fs-5 text-dark mb-4">“The delivery ecosystem is remarkably consistent. The raw whole food formulations helped reset my retriever's persistent metabolic issues.”</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="{% static 'img/team-1.jpg' %}" style="width: 50px; height: 50px; border-radius:50%; object-fit:cover;" alt="User">
+                        <div>
+                            <h6 class="mb-0 fw-bold">Akhil Raj</h6>
+                            <small class="text-muted">Bengaluru Guardian</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="editorial-quote-card">
+                    <p class="fs-5 text-dark mb-4">“Stunning packaging aesthetic matched with pristine ingredient verification metrics. It completely changes how we provision for our kittens.”</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="{% static 'img/team-2.jpg' %}" style="width: 50px; height: 50px; border-radius:50%; object-fit:cover;" alt="User">
+                        <div>
+                            <h6 class="mb-0 fw-bold">Sneha Maria</h6>
+                            <small class="text-muted">Kochi Guardian</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="editorial-quote-card">
+                    <p class="fs-5 text-dark mb-4">“As a veterinary professional, I carefully monitor commercial protein chains. Pet Pantry consistently clears top regulatory benchmarks.”</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="{% static 'img/team-3.jpg' %}" style="width: 50px; height: 50px; border-radius:50%; object-fit:cover;" alt="User">
+                        <div>
+                            <h6 class="mb-0 fw-bold">Rahul Dev</h6>
+                            <small class="text-muted">Medical Practitioner</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="premium-footer">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <h3 class="brand-font text-white mb-3">Pet Pantry.</h3>
+                <p class="opacity-75">A destination architectural hub built explicitly for verified functional life formulations and high-end companion care design items.</p>
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <h4>Navigation</h4>
+                <a href="#">Provision Center</a>
+                <a href="#">Our Ethics</a>
+                <a href="#">Clinical Science</a>
+                <a href="#">Media Center</a>
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <h4>Connect Base</h4>
+                <p class="mb-1">Kollam, Kerala, India</p>
+                <p class="mb-1">hello@petpantry.lifestyle</p>
+                <p>+91 9876543210</p>
+            </div>
+            <div class="col-lg-2 col-md-4">
+                <h4>Corporate</h4>
+                <p class="small opacity-50">© 2026 Pet Pantry Studio. All operational parameters registered securely.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. Navbar Scroll Transformation Controller
+        const navbar = document.querySelector(".navbar");
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 40) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+
+        // 2. High-Performance Intersection Observer for Scroll Reveals
+        const revealElements = document.querySelectorAll(".reveal-element");
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed");
+                    observer.unobserve(entry.target); // Optimize DOM tracking
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => {
+            // Apply structural reveal base styling properties programmatically
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            el.style.transition = "all 0.8s cubic-bezier(0.25, 1, 0.5, 1)";
+            revealObserver.observe(el);
+        });
+
+        // Immediate baseline fade-in for components containing class attributes directly
+        setTimeout(() => {
+            document.querySelectorAll('.reveal-element').forEach((el, index) => {
+               if(el.getBoundingClientRect().top < window.innerHeight) {
+                   el.classList.add('revealed');
+               }
+            });
+        }, 300);
+    });
+</script>
+
+</body>
+</html>
