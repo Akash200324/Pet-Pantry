@@ -8,7 +8,7 @@ A fully functional full-stack web application designed to help pet owners manage
 - **Frontend:** HTML5, CSS3, JavaScript
 - **Backend:** Node.js / Python / PHP *(Replace with your specific backend language!)*
 - **Database:** MongoDB / MySQL / PostgreSQL *(Replace with your database!)*
-- **Payment Gateway:**razopay
+- **Payment Gateway:**razopay*
 ---
 
 ### ✨ Features
